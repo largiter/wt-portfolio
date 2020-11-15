@@ -4,6 +4,22 @@ import styled from 'styled-components';
 // import dribbble from '../../images/dribbble.svg';
 // import instagram from '../../images/instagram.svg';
 
+const Social = () => (
+  <SocialWrapper>
+    <IconWrapper href='behance.pl'>
+      <Icon src='/assets/behance.svg' />
+    </IconWrapper>
+
+    <IconWrapper href='behance.pl'>
+      <Icon src='/assets/dribbble.svg' />
+    </IconWrapper>
+
+    <IconWrapper href='behance.pl'>
+      <Icon src='/assets/instagram.svg' />
+    </IconWrapper>
+  </SocialWrapper>
+);
+
 const iconSize = '4rem';
 
 const SocialWrapper = styled.aside`
@@ -17,13 +33,13 @@ const SocialWrapper = styled.aside`
   transform: translateX(calc(${iconSize} / 2));
   z-index: 999;
 `;
-const IconWrapper = styled.a``;
-const Icon = styled.img`
+const IconWrapper = styled.a`
+  align-items: center;
   background: ${(props) => props.theme.color.burgundyLight};
   border-radius: 50%;
+  display: flex;
   height: ${iconSize};
-  padding: 0.5rem;
-  transition: 0.4s;
+  justify-content: center;
   width: ${iconSize};
 
   &:hover {
@@ -31,21 +47,11 @@ const Icon = styled.img`
     border: 1px solid ${(props) => props.theme.color.pink};
   }
 `;
-
-const Social = () => (
-  <SocialWrapper>
-    <IconWrapper href='behance.pl'>
-      <Icon src='behance' />
-    </IconWrapper>
-
-    <IconWrapper href='behance.pl'>
-      <Icon src='dribbble' />
-    </IconWrapper>
-
-    <IconWrapper href='behance.pl'>
-      <Icon src='instagram' />
-    </IconWrapper>
-  </SocialWrapper>
-);
+const Icon = styled.img`
+  height: inherit;
+  padding: 0.7rem;
+  transition: 0.4s;
+  width: inherit;
+`;
 
 export default Social;

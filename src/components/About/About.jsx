@@ -1,8 +1,7 @@
 import React, { useRef, useEffect } from 'react';
 import styled from 'styled-components';
 import Section from '../Genelal/Section';
-import LineSeparator from '../Genelal/LineSeparator';
-import NavLink from '../Button/NavLink';
+import { fluidFontSize } from '../../styles/typography';
 
 const About = () => (
   <Section id='about' title='About me' image='/assets/images/bg3.png'>
@@ -30,15 +29,14 @@ const About = () => (
   </Section>
 );
 
-const ProjectsWrapper = styled(Section)``;
 const AboutContent = styled.div``;
 const AuthorPhoto = styled.img`
   height: auto;
   max-width: 100%;
-  padding-left: 10em;
+  padding-left: 19vmin;
 `;
 const Title = styled.h3`
-  font-size: 3em;
+  ${fluidFontSize(20, 50, 200, 1600)};
 `;
 const AboutText = styled.div`
   position: relative;
@@ -48,17 +46,6 @@ const AboutText = styled.div`
     margin-bottom: 2em;
     margin-top: 2em;
   }
-`;
-const Contact = styled.div`
-  margin-top: 6em;
-`;
-const ContactTop = styled.p`
-  font-size: 1.6em;
-  margin-bottom: 0 !important;
-`;
-const Email = styled(NavLink)`
-  font-size: 3em;
-  font-weight: 900;
 `;
 
 export default About;

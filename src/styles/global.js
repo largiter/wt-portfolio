@@ -71,7 +71,7 @@ const GlobalStyle = createGlobalStyle`
   	font-family: 'Montserrat', sans-serif;
   	font-weight: 400;
   	line-height: 1.9;
-    ${fluidFontSize(15, 17, 300, 1600)};
+    ${fluidFontSize(15, 17, 700, 1600)};
   }
   figure {
     margin: 0;

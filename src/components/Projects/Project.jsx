@@ -2,8 +2,10 @@ import React, { useEffect, useRef, useState } from 'react';
 import styled from 'styled-components';
 import gsap from 'gsap';
 import Link from 'next/link';
+import { media } from '../../styles/media';
+import useWindowSize from '../../hooks/useWindowSize';
 
-const Project = ({ image, title, desc, index }) => {
+const Project = ({ image, title, desc, index, category, hasSubpage }) => {
   const [tlShowDesc] = useState(gsap.timeline({ paused: true }));
   const projectUrl = '/projects/1';
 
@@ -11,6 +13,7 @@ const Project = ({ image, title, desc, index }) => {
   const descRef = useRef(null);
   const imgWrapperRef = useRef(null);
   const additionalRef = useRef(null);
+  const { isDesktop } = useWindowSize();
 
   const slideAdditionalOnScroll = () => {
     const additional = additionalRef.current;
@@ -72,24 +75,24 @@ const Project = ({ image, title, desc, index }) => {
   }, []);
 
   return (
-    <ProjectWrapper className='dupa' ref={sectionRef}>
-      <Link href={projectUrl}>
+    <Link href={projectUrl}>
+      <ProjectWrapper className='dupa' ref={sectionRef}>
         <ImageWrapper className='imageWrapper' ref={imgWrapperRef}>
           <ProjectImage src={image} />
           <Desc ref={descRef}>{desc}</Desc>
         </ImageWrapper>
-      </Link>
-      <Additional ref={additionalRef}>
-        <div>
-          <AppName>{title}</AppName>
-          <CategoryName>Web application</CategoryName>
-        </div>
-        <Link href={projectUrl}>
-          <ReadMore>Read more</ReadMore>
-        </Link>
-      </Additional>
-      <Index>0{index}</Index>
-    </ProjectWrapper>
+        <Additional ref={additionalRef}>
+          <AdditionalContent>
+            <div>
+              <AppName>{title}</AppName>
+              <CategoryName>{category}</CategoryName>
+            </div>
+            {isDesktop && <ReadMore>Read more</ReadMore>}
+          </AdditionalContent>
+        </Additional>
+        <Index>0{index}</Index>
+      </ProjectWrapper>
+    </Link>
   );
 };
 
@@ -126,7 +129,7 @@ const Desc = styled.p`
     background: linear-gradient(
       180deg,
       transparent 0%,
-      rgba(255, 255, 255, 0.5) 100%
+      rgba(255, 255, 255, 0.9) 100%
     );
     content: '';
     height: 100%;
@@ -139,11 +142,6 @@ const Desc = styled.p`
 `;
 
 const Additional = styled.div`
-  align-items: center;
-  color: ${(props) => props.theme.color.white};
-  display: grid;
-  grid-template-columns: 2fr auto;
-  padding: 2em ${(props) => props.theme.innerSpace} 2em 2em;
   position: relative;
   transform: translateX(${(props) => props.theme.innerSpace});
 
@@ -155,19 +153,37 @@ const Additional = styled.div`
     background: ${(props) => props.theme.color.burgundy};
     bottom: 0;
     content: '';
-    height: 190%;
+    height: 130%;
     left: 0;
     position: absolute;
     width: 100%;
+
+    ${media.md`
+      bottom: 0;
+      height: 190%;
+      left: 0;
+    `}
   }
+`;
+const AdditionalContent = styled.div`
+  align-items: center;
+  color: ${(props) => props.theme.color.white};
+  display: grid;
+  grid-column-gap: 3em;
+  grid-row-gap: 1em;
+  grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+  padding: 2em ${(props) => props.theme.innerSpace} 2em 2em;
 `;
 const ReadMore = styled.p`
   border: 1px solid ${(props) => props.theme.color.white};
   color: inherit;
   cursor: pointer;
-  font-size: 1.2em;
-  padding: 0.8em 1.5em;
+  justify-self: flex-end;
+  padding: 0.4em 1.5em;
+  text-align: center;
   text-transform: uppercase;
+  white-space: nowrap;
+  width: fit-content;
 
   &:hover {
     background: ${(props) => props.theme.color.white};
@@ -177,11 +193,16 @@ const ReadMore = styled.p`
 const AppName = styled.h3``;
 const CategoryName = styled.p``;
 const Index = styled.div`
-  bottom: -5vmin;
+  bottom: 0;
   color: ${(props) => props.theme.color.burgundyLight};
-  font-size: 6em;
-  left: 1vmin;
+  font-size: 4em;
+  left: -0.5em;
   position: absolute;
+
+  ${media.md`
+    bottom: -5vmin;
+    left: -5vmin;
+  `}
 `;
 
 export default Project;

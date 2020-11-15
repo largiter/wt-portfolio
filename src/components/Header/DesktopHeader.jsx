@@ -19,17 +19,17 @@ const DesktopHeader = () => {
     <Wrapper>
       <NavLink
         handleOnClick={() => goToSection('projects')}
-        text="PROJECTS"
+        text='PROJECTS'
         forceActive={currentSection === sections[0]}
       />
       <NavLink
         handleOnClick={() => goToSection('about')}
-        text="ABOUT ME"
+        text='ABOUT ME'
         forceActive={currentSection === sections[1]}
       />
       <NavLink
         handleOnClick={() => goToSection('contact')}
-        text="CONTACT"
+        text='CONTACT'
         forceActive={currentSection === sections[2]}
       />
     </Wrapper>
@@ -37,16 +37,16 @@ const DesktopHeader = () => {
 };
 
 const Wrapper = styled.div`
+  background: ${(props) => props.theme.color.burgundy};
   color: ${(props) => props.theme.color.white};
+  display: flex;
+  justify-content: center;
+  padding: 1em;
   position: fixed;
-  z-index: 999;
   right: 0;
   top: 0;
-  padding: 1em;
-  display: flex;
-  background: ${(props) => props.theme.color.burgundy};
   width: calc(100% - 40vw);
-  justify-content: center;
+  z-index: 998;
 `;
 
 export default DesktopHeader;

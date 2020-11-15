@@ -1,7 +1,8 @@
 import { useState, useEffect } from 'react';
+import { breakpoints } from '../styles/media';
 
 const useWindowSize = () => {
-  const desktopMinWidth = 769;
+  const desktopMinWidth = breakpoints.sm;
   const isClient = typeof window === 'object';
 
   const [windowSize, setWindowSize] = useState({

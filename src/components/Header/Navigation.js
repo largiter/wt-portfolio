@@ -1,11 +1,21 @@
 import React, { useEffect, useRef, useState } from 'react';
 import styled from 'styled-components';
 import gsap from 'gsap';
+import { useDispatch, useSelector } from 'react-redux';
+import { fluidFontSize } from '../../styles/typography';
+import { requestSection } from '../../store/dimensions/dimensions.action';
 
-const Navigation = ({ isNavVisible }) => {
+const Navigation = ({ isNavVisible, setIsNavVisible }) => {
   const [tlNav] = useState(gsap.timeline({ paused: true }));
   const navigationRef = useRef(null);
   const isInitialRun = useRef(true);
+
+  const dispatch = useDispatch();
+  const { currentSection } = useSelector((state) => state.dimensions);
+  const goToSection = (sectionId) => {
+    dispatch(requestSection(sectionId));
+    setIsNavVisible(false);
+  };
 
   useEffect(() => {
     const navigationWrapper = navigationRef.current;
@@ -27,37 +37,41 @@ const Navigation = ({ isNavVisible }) => {
   return (
     <NavigationWrapper ref={navigationRef}>
       <NavigationItem>
-        <a href="#About_me">About Me</a>
+        <a onClick={() => goToSection('about')}>About me</a>
       </NavigationItem>
       <NavigationItem>
-        <a href="#Projects">Projects</a>
+        <a onClick={() => goToSection('projects')}>Projects</a>
       </NavigationItem>
       <NavigationItem>
-        <a href="#Contact">Contact</a>
+        <a onClick={() => goToSection('contact')}>Contact</a>
       </NavigationItem>
     </NavigationWrapper>
   );
 };
 
 const NavigationWrapper = styled.nav`
-  z-index: 990;
-  position: fixed;
-  top: 0;
-  left: 0;
   background: #fff;
-  height: 100vh;
-  width: 100vw;
   display: grid;
-  grid-gap: 3em;
   grid-auto-rows: min-content;
+  grid-gap: 3em;
+  height: 100vh;
+  left: 0;
   place-content: center;
+  position: fixed;
   text-align: center;
+  top: 0;
   transform: translateX(-100%);
+  width: 100vw;
+  z-index: 990;
 `;
 const NavigationItem = styled.h2`
+  color: ${(props) => props.theme.color.burgundy};
+  cursor: pointer;
   font-weight: 100;
-  font-size: calc(1vh + 2.5em);
-  color: ${props => props.theme.color.burgundy};
+
+  & > a {
+    ${fluidFontSize(50, 70, 200, 1600)};
+  }
 `;
 
 export default Navigation;

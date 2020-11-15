@@ -28,7 +28,7 @@ const Section = ({
   const [imageHeight, setImageHeight] = useState(0);
   const [sectionTop, setSectionTop] = useState(0);
   const [sectionHeight, setSectionHeight] = useState(0);
-  const { windowWidth } = useWindowSize();
+  const { windowWidth, isDesktop } = useWindowSize();
   const [sectionAreas, setSectionAreas] = useState({
     start: undefined,
     end: undefined,
@@ -50,17 +50,28 @@ const Section = ({
     });
   };
 
+  const checkIsTitle = () => {
+    if (!title) return false;
+
+    if (isHome && isDesktop) {
+      return false;
+    }
+
+    return true;
+  };
+
   useEffect(() => {
     getImageHeight();
     getSectionAreas(sectionWrapperRef.current);
   }, [windowWidth]);
 
   useEffect(() => {
+    const sectionWrapper = sectionWrapperRef.current;
+    if (!sectionWrapper) return;
+
     const getTop = () => {
-      setSectionTop(sectionWrapperRef.current.getBoundingClientRect().top);
-      setSectionHeight(
-        sectionWrapperRef.current.getBoundingClientRect().height
-      );
+      setSectionTop(sectionWrapper.getBoundingClientRect().top);
+      setSectionHeight(sectionWrapper.getBoundingClientRect().height);
     };
 
     getTop();
@@ -74,7 +85,7 @@ const Section = ({
       <Curtain ref={forwardedRef} isLight={isLight} />
       <StyledImage ref={imageRef} src={image} alt='alt' />
       <Content>
-        {title && (
+        {checkIsTitle() && (
           <SectionTitle imageHeight={imageHeight} isLight={isLight}>
             {title}
           </SectionTitle>

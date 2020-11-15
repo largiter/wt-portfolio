@@ -11,5 +11,5 @@ export default {
   },
   radius: '3px',
   headerHeight: '40px',
-  innerSpace: '15vmin',
+  innerSpace: '14vmin',
 };

@@ -32,7 +32,6 @@ const Home = () => {
 
   useEffect(() => {
     const curtain = curtainRef.current;
-
     const wrapper = wrapperRef.current;
     const initialHello = wrapper.querySelector('#initialHello');
     const name = wrapper.querySelector('#name');
@@ -60,45 +59,44 @@ const Home = () => {
   }, [tlMain, isLoaded]);
 
   return (
-    <>
-      <FixedTitle id='fixedTitle' imageHeight={imageHeight}>
-        PORTFOLIO
-      </FixedTitle>
-      <Section
-        forwardedRef={curtainRef}
-        image='/assets/images/bg1.png'
-        windowHeight={windowHeight}
-        isHome
-        handleSetImageHeight={setImageHeight}
-        handleSetImageWidth={setImageWidth}
-      >
-        <Wrapper ref={wrapperRef}>
-          <Title>
-            <InitialHello id='initialHello' ref={initialHelloRef}>
-              <HelloLetters className='letters'>
-                {'HELLO.'.split('').map((letter, index) => (
-                  <div key={index}>{letter}</div>
-                ))}
-              </HelloLetters>
-            </InitialHello>
-            <br />
-            <Name>
-              <div id='name'>I'm Wiktoria</div>
-            </Name>
-          </Title>
-          <Desc>
-            <div id='desc'>
-              <div id='separator'>
-                <LineSeparator />
-              </div>
-              I share my time between exploring the <br />
+    <Section
+      forwardedRef={curtainRef}
+      image='/assets/images/bg1.png'
+      windowHeight={windowHeight}
+      isHome
+      handleSetImageHeight={setImageHeight}
+      handleSetImageWidth={setImageWidth}
+      title='PORTFOLIO'
+    >
+      <Wrapper ref={wrapperRef}>
+        <Title>
+          <InitialHello id='initialHello' ref={initialHelloRef}>
+            <HelloLetters className='letters'>
+              {'HELLO.'.split('').map((letter, index) => (
+                <div key={index}>{letter}</div>
+              ))}
+            </HelloLetters>
+          </InitialHello>
+          <br />
+          <Name>
+            <div id='name'>I'm Wiktoria</div>
+          </Name>
+        </Title>
+        <Desc>
+          <div id='desc'>
+            <div id='separator'>
+              <LineSeparator />
+            </div>
+            <p>
+              <span>I share my time between exploring the</span>
+              {isDesktop && <br />}
               <span className='marker'>human</span> brain and{' '}
               <span className='marker'>designing</span> products.
-            </div>
-          </Desc>
-        </Wrapper>
-      </Section>
-    </>
+            </p>
+          </div>
+        </Desc>
+      </Wrapper>
+    </Section>
   );
 };
 
@@ -113,7 +111,7 @@ const InitialHello = styled.div`
   font-size: 1.3em;
   overflow: hidden;
   position: absolute;
-  transform-origin: 0% 0%;
+  transform-origin: 0 0;
 `;
 const HelloLetters = styled.span`
   display: inline-flex;
@@ -122,7 +120,7 @@ const Title = styled.h1`
   font-weight: 200;
   width: fit-content;
 `;
-const Desc = styled.p`
+const Desc = styled.div`
   max-width: 45rem;
   overflow: hidden;
 
@@ -133,27 +131,7 @@ const Desc = styled.p`
 const Name = styled.div`
   font-size: 0.7em;
   overflow: hidden;
-  padding-top: 0.5em;
-`;
-const FixedTitle = styled.h2`
-  font-size: 13vw;
-  line-height: 1em;
-  position: absolute;
-  right: calc(${(props) => props.theme.innerSpace} + 0.6em);
-  top: calc(${(props) => props.imageHeight}px + 6vw);
-  transform: rotate(-90deg) translateX(100%);
-  transform-origin: 100% 0;
-
-  ${media.sm`
-    top: 40vw;
-    left: calc(40vw + 0.4em);
-    position: fixed;
-    z-index: 999;
-    line-height: 1em;
-    transform: rotate(-90deg);
-    transform-origin: 0 100%;
-    font-size: 6vw;
-  `};
+  padding-top: 1em;
 `;
 
 export default Home;
