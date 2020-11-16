@@ -93,6 +93,9 @@ const GlobalStyle = createGlobalStyle`
   }
   img {
     display: block;
+    object-fit: contain;
+    height: 100%;
+    width: 100%;
   }
   .marker {
     background: ${(props) => props.theme.color.pink};

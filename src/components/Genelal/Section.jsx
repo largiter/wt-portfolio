@@ -129,6 +129,7 @@ const SectionTitle = styled.h2`
   top: calc(${(props) => props.imageHeight}px + 6vw);
   transform: rotate(-90deg) translateX(100%);
   transform-origin: 100% 0;
+  z-index: 900;
 
   ${media.sm`
     color: ${(props) =>

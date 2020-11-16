@@ -7,7 +7,7 @@ import useWindowSize from '../../hooks/useWindowSize';
 
 const Project = ({ image, title, desc, index, category, hasSubpage }) => {
   const [tlShowDesc] = useState(gsap.timeline({ paused: true }));
-  const projectUrl = '/projects/1';
+  const projectUrl = '/projects/earthly';
 
   const sectionRef = useRef(null);
   const descRef = useRef(null);
