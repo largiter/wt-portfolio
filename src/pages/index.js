@@ -71,7 +71,6 @@ const IndexPage = () => {
         <Projects />
         <About />
         <Contact />
-        <Footer />
       </Layout>
     </>
   );

@@ -5,9 +5,8 @@ import Link from 'next/link';
 import { media } from '../../styles/media';
 import useWindowSize from '../../hooks/useWindowSize';
 
-const Project = ({ image, title, desc, index, category, hasSubpage }) => {
+const Project = ({ image, title, desc, index, category, projectUrl }) => {
   const [tlShowDesc] = useState(gsap.timeline({ paused: true }));
-  const projectUrl = '/projects/earthly';
 
   const sectionRef = useRef(null);
   const descRef = useRef(null);
@@ -75,24 +74,22 @@ const Project = ({ image, title, desc, index, category, hasSubpage }) => {
   }, []);
 
   return (
-    <Link href={projectUrl}>
-      <ProjectWrapper className='dupa' ref={sectionRef}>
-        <ImageWrapper className='imageWrapper' ref={imgWrapperRef}>
-          <ProjectImage src={image} />
-          <Desc ref={descRef}>{desc}</Desc>
-        </ImageWrapper>
-        <Additional ref={additionalRef}>
-          <AdditionalContent>
-            <div>
-              <AppName>{title}</AppName>
-              <CategoryName>{category}</CategoryName>
-            </div>
-            {isDesktop && <ReadMore>Read more</ReadMore>}
-          </AdditionalContent>
-        </Additional>
-        <Index>0{index}</Index>
-      </ProjectWrapper>
-    </Link>
+    <ProjectWrapper className='dupa' ref={sectionRef}>
+      <ImageWrapper className='imageWrapper' ref={imgWrapperRef}>
+        <ProjectImage src={image} />
+        <Desc ref={descRef}>{desc}</Desc>
+      </ImageWrapper>
+      <Additional ref={additionalRef}>
+        <AdditionalContent>
+          <div>
+            <AppName>{title}</AppName>
+            <CategoryName>{category}</CategoryName>
+          </div>
+          {isDesktop && projectUrl && <ReadMore>Read more</ReadMore>}
+        </AdditionalContent>
+      </Additional>
+      <Index>0{index}</Index>
+    </ProjectWrapper>
   );
 };
 

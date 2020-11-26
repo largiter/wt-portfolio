@@ -5,9 +5,9 @@ import { media } from '../../styles/media';
 const Footer = () => (
   <FooterWrapper>
     <FooterContent>
-      <span>Illustrations & Web Design by </span>
+      <span>Illustrations & Web Design by</span>
       <a href='linkedin.pl'>
-        <strong>Wiktoria Truong</strong>
+        <strong> Wiktoria Truong</strong>
       </a>{' '}
       <Rights>© All rights reserved</Rights>
     </FooterContent>

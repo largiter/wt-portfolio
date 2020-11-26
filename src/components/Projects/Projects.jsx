@@ -1,6 +1,7 @@
 import React, { useEffect } from 'react';
 import styled from 'styled-components';
 import gsap from 'gsap';
+import Link from 'next/link';
 import Section from '../Genelal/Section';
 import Project from './Project';
 import { media } from '../../styles/media';
@@ -15,7 +16,7 @@ const Projects = () => {
 
   const projects = [
     {
-      hasSubpage: true,
+      url: 'projects/earthly',
       name: 'NASK',
       image: '/assets/images/projects-main/project-mini-nask.jpg',
       category: 'Web application',
@@ -23,7 +24,7 @@ const Projects = () => {
         'Creating an e-learning platform with interactive games where students can be educated (through entertainment) about topics related to cyber security.',
     },
     {
-      hasSubpage: true,
+      url: 'projects/nask',
       name: 'Earthly',
       image: '/assets/images/projects-main/project-mini-earthly.jpg',
       category: 'Mobile application',
@@ -31,7 +32,6 @@ const Projects = () => {
         'An eco-habit tracker application that helps you monitor your eco-friendly habits, tracks your impact on the planet and educates on preventing environmental pollution.',
     },
     {
-      hasSubpage: false,
       name: 'FLOWERELLE3',
       image: '/assets/images/projects-main/p2.png',
       category: 'Lorem ipsum',
@@ -48,8 +48,22 @@ const Projects = () => {
     >
       <ProjectsWrapper>
         <AllProjects>
-          {projects.map(
-            ({ name, image, desc, category, hasSubpage }, index) => (
+          {projects.map(({ name, image, desc, category, url }, index) =>
+            url ? (
+              <Link href={url}>
+                <div>
+                  <Project
+                    key={name}
+                    image={image}
+                    title={name}
+                    category={category}
+                    desc={desc}
+                    index={index + 1}
+                    projectUrl={url}
+                  />
+                </div>
+              </Link>
+            ) : (
               <Project
                 key={name}
                 image={image}
@@ -57,7 +71,7 @@ const Projects = () => {
                 category={category}
                 desc={desc}
                 index={index + 1}
-                hasSubpage={hasSubpage}
+                projectUrl={undefined}
               />
             )
           )}

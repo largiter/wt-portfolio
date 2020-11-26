@@ -1,65 +1,81 @@
-import React, { useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useRouter } from 'next/router';
 import Link from 'next/link';
 import gsap from 'gsap';
 import styled, { css } from 'styled-components';
 import Layout from '../../../components/Layout/Layout';
 import { projects } from '../../../content/projects';
+import Home from '../../../components/Home/Home';
 
 const Project = () => {
   const router = useRouter();
-  const { id } = router.query;
-  const { slug, title, desc, content } = projects;
+  // const { slug, title, desc, content } = projects[0];
+  const [project, setProject] = useState(null);
+  const [currentSlug, setCurrentSlug] = useState(null);
 
   useEffect(() => {
-    if (slug !== id) {
-      router.push('/');
-      return;
-    }
+    const { id } = router.query;
+    if (id) setCurrentSlug(id);
 
-    gsap.to('body', { duration: 1, opacity: 1 });
-  }, []);
+    const currentProject = projects.find(
+      (singleProject) => singleProject.slug === id
+    );
+
+    setProject(currentProject);
+
+    // gsap.to('body', { duration: 1, opacity: 1 });
+    // gsap.from("body", { duration: 1, x: "100%" });
+  }, [router]);
+
+  useEffect(() => {
+    if (project === null) return;
+    if (project === undefined || project.slug !== currentSlug) {
+      router.push('/');
+    }
+  }, [project, currentSlug]);
 
   return (
     <Layout>
-      <div>hello from index {id}</div>
+      <Home />
       <ProjectWrapper>
-        {content.map(({ type, contentTitle, contentBody }) => (
-          <ContentBlock type={type}>
-            <h2>{contentTitle}</h2>
-            <ContentBody>
-              {contentBody.map((bodyItem) => {
-                const objectKey = Object.keys(bodyItem)[0];
-                if (objectKey === 'text') {
-                  return <p>{bodyItem.text}</p>;
-                }
-                if (objectKey === 'list') {
-                  const { listTitle, listItems } = bodyItem.list;
-                  return (
-                    <ol>
-                      <p>{listTitle}</p>
-                      {listItems.map((listItem) => (
-                        <li>{listItem}</li>
-                      ))}
-                    </ol>
-                  );
-                }
-                if (objectKey === 'img') {
-                  return <img src={bodyItem.img} />;
-                }
-                if (objectKey === 'titled') {
-                  const { titledTitle, titledText } = bodyItem.titled;
-                  return (
-                    <div>
-                      <h3>{titledTitle}</h3>
-                      <p>{titledText}</p>
-                    </div>
-                  );
-                }
-              })}
-            </ContentBody>
-          </ContentBlock>
-        ))}
+        {project &&
+          project.content.map(({ type, contentTitle, contentBody }) => (
+            <ContentBlock type={type}>
+              <h2>{contentTitle}</h2>
+              <ContentBody>
+                {contentBody.map((bodyItem) => {
+                  const objectKey = Object.keys(bodyItem)[0];
+                  if (objectKey === 'text') {
+                    return <p>{bodyItem.text}</p>;
+                  }
+                  if (objectKey === 'list') {
+                    const { listTitle, listItems } = bodyItem.list;
+                    return (
+                      <ol>
+                        <p>{listTitle}</p>
+                        {listItems.map((listItem) => (
+                          <li>{listItem}</li>
+                        ))}
+                      </ol>
+                    );
+                  }
+                  if (objectKey === 'img') {
+                    return <img src={bodyItem.img} />;
+                  }
+                  if (objectKey === 'titled') {
+                    const { titledTitle, titledText } = bodyItem.titled;
+                    return (
+                      <div>
+                        <h3>{titledTitle}</h3>
+                        <p>{titledText}</p>
+                      </div>
+                    );
+                  }
+                  return false;
+                })}
+              </ContentBody>
+            </ContentBlock>
+          ))}
       </ProjectWrapper>
     </Layout>
   );
@@ -70,6 +86,7 @@ const ProjectWrapper = styled.main`
   display: flex;
   flex-direction: column;
   margin: 0 ${(props) => props.theme.innerSpace};
+  padding-top: 10em;
 `;
 
 const BlockLeft = css`
@@ -100,7 +117,7 @@ const ContentBlock = styled.section`
 
 const ContentBody = styled.div`
   align-self: center;
-  width: 70%;
+  width: 65%;
 `;
 
 export default Project;

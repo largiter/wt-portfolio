@@ -17,6 +17,8 @@ import Social from '../Home/Social';
 import { setDimension } from '../../store/dimensions/dimensions.action';
 import { DIMENSIONS_KEYS } from '../../store/dimensions/dimensions.keys';
 import useSectionsSwitcher from '../../hooks/useSectionsSwitcher';
+import Footer from '../Footer/Footer';
+import Home from '../Home/Home';
 
 if (typeof window !== 'undefined') {
   gsap.registerPlugin(ScrollTrigger);
@@ -41,6 +43,7 @@ const Layout = ({ children }) => {
       {windowWidth > breakpoints.sm ? <DesktopHeader /> : <Hamburger />}
       {children}
       {isDesktop ? <SocialDesktop width={leftSectionWidth} /> : <Social />}
+      <Footer />
     </LayoutWrapper>
   );
 };
