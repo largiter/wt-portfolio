@@ -48,33 +48,17 @@ const Projects = () => {
     >
       <ProjectsWrapper>
         <AllProjects>
-          {projects.map(({ name, image, desc, category, url }, index) =>
-            url ? (
-              <Link href={url}>
-                <div>
-                  <Project
-                    key={name}
-                    image={image}
-                    title={name}
-                    category={category}
-                    desc={desc}
-                    index={index + 1}
-                    projectUrl={url}
-                  />
-                </div>
-              </Link>
-            ) : (
-              <Project
-                key={name}
-                image={image}
-                title={name}
-                category={category}
-                desc={desc}
-                index={index + 1}
-                projectUrl={undefined}
-              />
-            )
-          )}
+          {projects.map(({ name, image, desc, category, url }, index) => (
+            <Project
+              key={name}
+              image={image}
+              title={name}
+              category={category}
+              desc={desc}
+              index={index + 1}
+              projectUrl={undefined}
+            />
+          ))}
         </AllProjects>
       </ProjectsWrapper>
     </Section>

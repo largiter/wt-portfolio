@@ -85,7 +85,6 @@ const Project = ({ image, title, desc, index, category, projectUrl }) => {
             <AppName>{title}</AppName>
             <CategoryName>{category}</CategoryName>
           </div>
-          {isDesktop && projectUrl && <ReadMore>Read more</ReadMore>}
         </AdditionalContent>
       </Additional>
       <Index>0{index}</Index>
@@ -99,7 +98,6 @@ const ProjectWrapper = styled.div`
 `;
 const ImageWrapper = styled.div`
   box-shadow: 0 0 25px 0 rgba(0, 0, 0, 0.15);
-  cursor: pointer;
   overflow: hidden;
   position: relative;
   z-index: 1;
@@ -170,22 +168,6 @@ const AdditionalContent = styled.div`
   grid-row-gap: 1em;
   grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
   padding: 2em ${(props) => props.theme.innerSpace} 2em 2em;
-`;
-const ReadMore = styled.p`
-  border: 1px solid ${(props) => props.theme.color.white};
-  color: inherit;
-  cursor: pointer;
-  justify-self: flex-end;
-  padding: 0.4em 1.5em;
-  text-align: center;
-  text-transform: uppercase;
-  white-space: nowrap;
-  width: fit-content;
-
-  &:hover {
-    background: ${(props) => props.theme.color.white};
-    color: ${(props) => props.theme.color.burgundy};
-  }
 `;
 const AppName = styled.h3``;
 const CategoryName = styled.p``;

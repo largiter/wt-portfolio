@@ -1,21 +1,18 @@
 import React from 'react';
 import styled from 'styled-components';
-// import behance from '../../images/behance.svg';
-// import dribbble from '../../images/dribbble.svg';
-// import instagram from '../../images/instagram.svg';
 
 const Social = () => (
   <SocialWrapper>
-    <IconWrapper href='behance.pl'>
+    <IconWrapper target='_blank' href='https://behance.net/wiktoriatruong'>
       <Icon src='/assets/behance.svg' />
     </IconWrapper>
 
-    <IconWrapper href='behance.pl'>
-      <Icon src='/assets/dribbble.svg' />
+    <IconWrapper target='_blank' href='https://instagram.com/vic_ux'>
+      <Icon src='/assets/instagram.svg' />
     </IconWrapper>
 
-    <IconWrapper href='behance.pl'>
-      <Icon src='/assets/instagram.svg' />
+    <IconWrapper target='_blank' href='https://linkedin.com/in/wiktoria-truong'>
+      <Icon src='/assets/linkedin.svg' />
     </IconWrapper>
   </SocialWrapper>
 );

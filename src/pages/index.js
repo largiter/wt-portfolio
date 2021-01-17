@@ -1,6 +1,5 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import Head from 'next/head';
-
 import gsap from 'gsap';
 import styled from 'styled-components';
 import { useSelector } from 'react-redux';
@@ -8,7 +7,6 @@ import Layout from '../components/Layout/Layout';
 import Home from '../components/Home/Home';
 import Projects from '../components/Projects/Projects';
 import About from '../components/About/About';
-import Footer from '../components/Footer/Footer';
 import Contact from '../components/Contact/Contact';
 import useScroll from '../hooks/useScroll';
 import useSectionsSwitcher from '../hooks/useSectionsSwitcher';
@@ -17,6 +15,8 @@ import useWindowSize from '../hooks/useWindowSize';
 
 const IndexPage = () => {
   useSectionsSwitcher();
+
+  const fixedTitleRef = useRef(null);
 
   const [isReachedBreakpoint, setIsReachedBreakpoint] = useState(false);
   const { scrollY } = useScroll();
@@ -61,13 +61,17 @@ const IndexPage = () => {
       </Head>
 
       {isDesktop && (
-        <FixedTitle id='fixedTitle' imageHeight={leftSectionWith}>
+        <FixedTitle
+          ref={fixedTitleRef}
+          id='fixedTitle'
+          imageHeight={leftSectionWith}
+        >
           PORTFOLIO
         </FixedTitle>
       )}
 
       <Layout>
-        <Home />
+        <Home fixedTitle={fixedTitleRef.current} />
         <Projects />
         <About />
         <Contact />

@@ -4,9 +4,13 @@ import NavLink from '../Button/NavLink';
 
 const SocialDesktop = ({ width }) => (
   <Wrapper id='socialDesktop' width={width}>
-    <NavLink href='linkedin.pl' text='linkedin' />
-    <NavLink href='dibble.pl' text='dribbble' />
-    <NavLink href='behence.pl' text='behance' />
+    <NavLink newTab href='https://behance.net/wiktoriatruong' text='behance' />
+    <NavLink newTab href='https://instagram.com/vic_ux' text='instagram' />
+    <NavLink
+      newTab
+      href='https://linkedin.com/in/wiktoria-truong'
+      text='linkedin'
+    />
   </Wrapper>
 );
 

@@ -9,7 +9,7 @@ import { media } from '../../styles/media';
 import LineSeparator from '../Genelal/LineSeparator';
 import SocialDesktop from './SocialDesktop';
 
-const Home = () => {
+const Home = ({ fixedTitle }) => {
   const { windowHeight, isDesktop } = useWindowSize();
   const curtainRef = useRef(null);
   const wrapperRef = useRef(null);
@@ -31,13 +31,14 @@ const Home = () => {
   };
 
   useEffect(() => {
+    if (!fixedTitle) return;
+
     const curtain = curtainRef.current;
     const wrapper = wrapperRef.current;
     const initialHello = wrapper.querySelector('#initialHello');
     const name = wrapper.querySelector('#name');
     const separator = wrapper.querySelector('#separator');
     const desc = wrapper.querySelector('#desc');
-    const fixedTitle = document.querySelector('#fixedTitle');
 
     tlMain.to('body', { duration: 1, opacity: 1 });
     tlMain.from(curtain, { duration: 2, x: '-100%' });
@@ -50,7 +51,7 @@ const Home = () => {
     tlMain.from(name, { y: '100%' });
     tlMain.from(separator, { y: '100%' }, '-=0.7');
     tlMain.from(desc, { y: '100%' }, '-=0.2');
-  }, []);
+  }, [fixedTitle]);
 
   useEffect(() => {
     if (isLoaded) {
